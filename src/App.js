@@ -1,16 +1,13 @@
 import React from "react";
 import { render } from "react-dom";
 import { Router } from "@reach/router";
+import { Provider } from "react-redux";
+import store from "./store";
+import DummyContainer from "./containers/DummyContainer";
 
 const NotFound = () => (
   <div>
     <h2>Sorry, nothing here</h2>
-  </div>
-);
-
-const Home = () => (
-  <div>
-    <h2>Ready</h2>
   </div>
 );
 
@@ -27,7 +24,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <Router>
-        <Home path="/" />
+        <DummyContainer path="/" />
         <Dashboard path="/dashboard" />
         <NotFound default />
       </Router>
@@ -35,4 +32,9 @@ const App = () => {
   );
 };
 
-render(<App />, document.getElementById("root"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
